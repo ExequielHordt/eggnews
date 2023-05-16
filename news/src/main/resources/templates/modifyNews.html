@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias Egg</title>
+    <link rel="preload" href="/css/nomarize.css">
+    <link rel="stylesheet" th:href="@{/css/nomarize.css}">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ovo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/css/home_styles.css">
+    <link rel="stylesheet" th:href="@{/css/home_styles.css}">
+    <link rel="icon" th:href="@{/icons/05_Icon_EggNews.ico}" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="header-justify header-shadow">
+        <a th:href="@{/home}"><img th:src="@{/icons/01 Logo EggNews.png}" class="logo-justify" alt="Logo de Egg"
+                width="70px" height="70px"></a>
+        <nav class="header-justify-nav nav-text-color">
+            <a role="link" aria-disabled="true">
+                <h2>Inicio</h2>
+            </a>
+            <a th:href="@{/adminPanel}" class="nav-justify-login">
+                <p>Iniciar Sesion</p><img th:src="@{/icons/00 Login Egg News.png}" alt="Icono de Iniciar Sesion"
+                    height="45px" width="45px">
+            </a>
+        </nav>
+    </header>
+    <div class="container-sm justify-content-center">
+        <form th:action="@{/modifyNews/search}" method="get">
+            <div class="row card__form shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div th:if="${success != null}" class="card text-bg-success mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title">¡Se ha modificado con éxito!</h5>
+                        <p class="card-text" th:text="${success}"></p>
+                    </div>
+                </div>
+                <div th:if="${error != null}" class="card text-bg-danger mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title">¡Ocurrio un Error!</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label class="form-label subtittle__label">ID de la Noticia</label>
+                    <input type="number" class="form-control form-control-lg border border-primary" name="id"
+                        placeholder="ID Noticia">
+                </div>
+                <button class="btn btn-primary" type="submit">Buscar</button>
+                <div th:if="${searchNull != null}" class="card text-bg-danger mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title">¡Ocurrio un Error!</h5>
+                        <p class="card-text" th:text="No se encontro ninguna noticia. ID incorrecto o noticia eliminada"></p>
+                    </div>
+                </div>
+        </form>
+        <table class="table table-dark table-hover" th:if="${Result != null}">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row" th:text="${Result.id}"></th>
+                    <td th:text="${Result.title}"></td>
+                    <td><a th:href="@{/modifyNews/modifyImage/__${Result.id}__}"><img th:src="@{/icons/06_Portrait.png}"
+                                alt="Icono de modificar portada" class="logo-justify" width="30px"
+                                height="30px">portada</a><a th:href="@{/modifyNews/modifyTittle/__${Result.id}__}"><img
+                                th:src="@{/icons/07_Tittle.png}" alt="Icono de modificar el titulo" class="logo-justify"
+                                width="30px" height="30px">titulo</a><a
+                            th:href="@{/modifyNews/modifyBody/__${Result.id}__}"><img th:src="@{/icons/08_Body.png}"
+                                alt="Icono de modificar el contenido" width="30px" height="30px">contenido</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    </div>
+    <footer class="footer-background-color footer-shadow">
+        <div class="copyrights">
+            <p>© 2023 EggNews.com - Exequiel Hordt - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

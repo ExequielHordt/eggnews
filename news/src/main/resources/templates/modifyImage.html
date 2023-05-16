@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Portada</title>
+    <link rel="preload" href="/css/nomarize.css">
+    <link rel="stylesheet" th:href="@{/css/nomarize.css}">
+    <link rel="preload" href="/js/uploadImage.js">
+    <script type="text/javascript" th:src="@{/js/uploadImage.js}"></script>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ovo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="/css/home_styles.css">
+    <link rel="stylesheet" th:href="@{/css/home_styles.css}">
+    <link rel="icon" th:href="@{/icons/05_Icon_EggNews.ico}" type="image/x-icon" />
+</head>
+
+<body>
+    <header class="header-justify header-shadow">
+        <a th:href="@{home}"><img th:src="@{/icons/01 Logo EggNews.png}" class="logo-justify" alt="Logo de Egg"
+                width="70px" height="70px"></a>
+        <nav class="header-justify-nav nav-text-color">
+            <a th:href="@{home}">
+                <h2>Inicio</h2>
+            </a>
+            <a th:href="@{adminPanel}" class="nav-justify-login">
+                <p>Iniciar Sesion</p><img th:src="@{/icons/00 Login Egg News.png}" alt="Icono de Iniciar Sesion"
+                    height="45px" width="45px">
+            </a>
+        </nav>
+    </header>
+    <form th:action="@{/modifyImage/__${Report.id}__}" method="post">
+        <div class="container-sm justify-content-center">
+            <div class="row card__form shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div th:if="${error != null}" class="card text-bg-danger mb-5">
+                    <div class="card-body">
+                        <h5 class="card-title">¡Ocurrio un Error!</h5>
+                        <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <label class="form-label subtittle__label">Portada</label>
+                    <input type="number" hidden th:value="Report.id" name="id">
+                    <input type="text" class="form-control form-control-lg border border-primary" name="portrait"
+                        placeholder="Link de la imagen">
+                </div>
+                <button class="btn btn-primary" type="submit">Modificar</button>
+            </div>
+        </div>
+    </form>
+    <footer class="footer-background-color footer-shadow">
+        <div class="copyrights">
+            <p>© 2023 EggNews.com - Exequiel Hordt - Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" th:src="@{/js/uploadImage.js}"></script>
+</body>
+
+</html>
