@@ -35,9 +35,9 @@ public class TittleModifyController {
     }
 
     @PostMapping("{id}")
-    public String modify(@PathVariable Long id, @RequestParam String tittle, ModelMap model, RedirectAttributes error) {
+    public String modify(@PathVariable Long id, @RequestParam String title, ModelMap model, RedirectAttributes error) {
         try {
-            service.update(id, tittle, service.byId(id).getPortrait(), service.byId(id).getBody());
+            service.update(id, title, service.byId(id).getPortrait(), service.byId(id).getBody());
             model.put("success", "¡El titulo ha sido modificado correctamente!");
             return "modifyNews";
         } catch (Exception e) {

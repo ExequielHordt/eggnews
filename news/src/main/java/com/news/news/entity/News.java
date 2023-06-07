@@ -1,6 +1,7 @@
 package com.news.news.entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,5 +22,6 @@ public class News implements Serializable {
     private Long id;
     private String title;
     private String portrait;
+    @Column(length = 8000)
     private String body;
 }

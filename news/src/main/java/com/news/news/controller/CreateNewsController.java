@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -31,21 +32,21 @@ public class CreateNewsController {
     }
 
     @PostMapping("/create")
-    public String create(@RequestParam String tittle, @RequestParam String portrait,
-            @RequestParam String body, ModelMap model) {
+    public String create(@RequestParam String title, @RequestParam String portrait,
+            @RequestParam String body, RedirectAttributes redirectAttributes) {
         try {
-            service.create(tittle, portrait, body);
-            model.put("success", "¡La noticia fue creada con éxito!");
+            service.create(title, portrait, body);
+            redirectAttributes.addFlashAttribute("success", "¡La noticia fue creada con éxito!");
             return "redirect:/";
         } catch (Exception ex) {
-            model.put("error", ex.getMessage());
-            return "createNews";
+            redirectAttributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/createNews/createNews";
         }
     }
 
-    @GetMapping("/home")
-    public String homePage() {
-        return "redirect:/";
+    @GetMapping("/")
+    public String home() {
+        return "/";
     }
 
     @GetMapping("/adminPanel")
